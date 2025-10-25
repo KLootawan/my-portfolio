@@ -66,7 +66,7 @@ export default function Hero() {
             </p>
             
             <p className="text-base sm:text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed px-4">
-              I'm learning to build with AI and Next.js.
+              I'm exploring tech solutions in health care.
               <br />
               <span className="font-semibold text-emerald-400">
                 Empowering Health with Movement and Modern Tech!
