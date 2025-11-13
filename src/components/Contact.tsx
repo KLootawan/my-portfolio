@@ -145,26 +145,38 @@ export default function Contact() {
     setSubmitStatus('idle')
     
     try {
-      // Simulate form submission with API call
-      await new Promise(resolve => setTimeout(resolve, 2000))
-      
-      // Simulate random success/failure for demo
-      const isSuccess = Math.random() > 0.2 // 80% success rate
-      
-      if (isSuccess) {
-        setSubmitStatus('success')
-        // Reset form on success
-        setFormData({
-          name: '',
-          email: '',
-          subject: '',
-          message: ''
-        })
-        setErrors({})
-      } else {
-        setSubmitStatus('error')
+      // Send form data to API route
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await response.json()
+      console.log('API Response:', data)
+
+      if (!response.ok) {
+        const errorMessage = data.details 
+          ? `${data.error}: ${data.details}` 
+          : data.error || 'Failed to send message'
+        console.error('API Error:', data)
+        throw new Error(errorMessage)
       }
+
+      // Success - reset form
+      console.log('Email sent successfully! ID:', data.id)
+      setSubmitStatus('success')
+      setFormData({
+        name: '',
+        email: '',
+        subject: '',
+        message: ''
+      })
+      setErrors({})
     } catch (error) {
+      console.error('Form submission error:', error)
       setSubmitStatus('error')
     } finally {
       setIsSubmitting(false)
@@ -270,13 +282,18 @@ export default function Contact() {
 
                 {submitStatus === 'error' && (
                   <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
-                    <div className="flex items-center">
-                      <svg className="w-5 h-5 text-red-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                    <div className="flex items-start">
+                      <svg className="w-5 h-5 text-red-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
                       </svg>
-                      <p className="text-red-700 dark:text-red-300 font-medium">
-                        Something went wrong. Please try again later.
-                      </p>
+                      <div className="flex-1">
+                        <p className="text-red-700 dark:text-red-300 font-medium mb-1">
+                          Something went wrong. Please try again later.
+                        </p>
+                        <p className="text-red-600 dark:text-red-400 text-sm">
+                          Check the browser console (F12) for more details.
+                        </p>
+                      </div>
                     </div>
                   </div>
                 )}
