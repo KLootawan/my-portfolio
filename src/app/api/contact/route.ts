@@ -1,7 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+// Initialize Resend only if API key is available
+function getResendClient() {
+  const apiKey = process.env.RESEND_API_KEY
+  if (!apiKey) {
+    return null
+  }
+  return new Resend(apiKey)
+}
 
 // Helper function to escape HTML
 function escapeHtml(text: string): string {
@@ -41,7 +48,7 @@ export async function POST(request: NextRequest) {
     if (!process.env.RESEND_API_KEY) {
       console.error('RESEND_API_KEY environment variable is not set')
       return NextResponse.json(
-        { error: 'Email service is not configured. Please check your RESEND_API_KEY in .env.local' },
+        { error: 'Email service is not configured. Please check your RESEND_API_KEY environment variable.' },
         { status: 500 }
       )
     }
@@ -52,7 +59,17 @@ export async function POST(request: NextRequest) {
     if (!recipientEmail) {
       console.error('CONTACT_EMAIL or RESEND_FROM_EMAIL environment variable is not set')
       return NextResponse.json(
-        { error: 'Email service is not configured. Please set CONTACT_EMAIL in .env.local' },
+        { error: 'Email service is not configured. Please set CONTACT_EMAIL environment variable.' },
+        { status: 500 }
+      )
+    }
+
+    // Initialize Resend client
+    const resend = getResendClient()
+    if (!resend) {
+      console.error('Failed to initialize Resend client')
+      return NextResponse.json(
+        { error: 'Email service is not configured. Please check your RESEND_API_KEY environment variable.' },
         { status: 500 }
       )
     }
