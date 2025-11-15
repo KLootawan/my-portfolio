@@ -19,10 +19,10 @@ export default function About() {
   }, [isIntersecting])
 
   const skills = [
-    { name: 'Frontend', technologies: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS'] },
-    { name: 'Backend', technologies: ['Node.js', 'Python', 'PostgreSQL', 'MongoDB'] },
-    { name: 'Tools', technologies: ['Git', 'Docker', 'AWS', 'Figma'] },
-    { name: 'Mobile', technologies: ['React Native', 'Flutter', 'iOS', 'Android'] }
+    { name: 'Product & Frontend', technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'] },
+    { name: 'Systems & Data', technologies: ['Node.js', 'Supabase', 'REST APIs', 'Automation'] },
+    { name: 'Physiotherapy Practice', technologies: ['Orthopedic Rehab', 'Movement Analysis', 'Patient Education', 'NCD Management'] },
+    { name: 'Digital Care Models', technologies: ['Hybrid Virtual Care', 'Virtual Assessments', 'Telehealth Triage', 'Healthy Aging Programs'] }
   ]
 
   return (
@@ -86,16 +86,36 @@ export default function About() {
                 <h3 className={`text-2xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>My Story</h3>
                 <div className="flex-1 flex flex-col justify-center">
                   <p className={`leading-relaxed mb-4 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                    I'm a passionate full-stack developer with over 5 years of experience creating 
-                    digital solutions that make a real impact. My journey began with a curiosity 
-                    about how websites work, and it has evolved into a deep love for crafting 
-                    beautiful, functional applications.
+                    I am a Physiotherapist, innovator, and lifelong learner driven by a deep passion for helping
+                    people move, heal, and live fuller lives. My work blends clinical expertise with a
+                    forward-thinking approach to technology, because I believe healthcare should be more—more
+                    accessible, more personalized, more efficient, and more human.
+                  </p>
+                  <p className={`leading-relaxed mb-4 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                    From early in my career, I saw the gaps that many patients face: long wait times, limited
+                    follow-up, challenges accessing specialist care, and barriers created by geography, work
+                    demands or finances. These experiences fueled my commitment to reimagining what Physiotherapy
+                    can look like. Today, I focus on integrating digital tools, and hybrid care models to improve
+                    outcomes, enhance patient experience, and increase access for underserved communities.
+                  </p>
+                  <p className={`leading-relaxed mb-4 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                    My entrepreneurial journey is deeply rooted in this mission. I am building systems and services
+                    that are not only clinically sound, but innovative, adaptable, and patient-centered. Whether
+                    through virtual rehabilitation platforms, tech-enhanced movement analysis, or streamlined digital
+                    workflows, my goal remains the same: to make high-quality physiotherapy available to more people,
+                    in ways that truly support their daily lives.
+                  </p>
+                  <p className={`leading-relaxed mb-4 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                    Beyond my professional work, I am passionate about sustainable living, exploring nature, and
+                    expressing myself creatively through art. I also care deeply about neurodivergence and hidden
+                    disabilities—areas that shape how I advocate for inclusive, empathetic, and flexible healthcare
+                    and work environments. These perspectives continually remind me that healing and wellbeing look
+                    different for everyone, and that our systems must evolve to honour that.
                   </p>
                   <p className={`leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                    I specialize in modern web technologies and enjoy working on projects that 
-                    challenge me to grow. When I'm not coding, you can find me exploring new 
-                    technologies, contributing to open source, or sharing knowledge with the 
-                    developer community.
+                    At the heart of everything I do is a belief in empowerment: empowering patients, empowering
+                    practitioners, and empowering communities through better care, better tools, and better
+                    understanding.
                   </p>
                 </div>
               </div>
