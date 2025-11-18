@@ -22,14 +22,14 @@ export default function Home() {
       <footer className={`text-white py-12 transition-colors duration-300 ${isDarkMode ? 'bg-gray-950' : 'bg-gray-900'}`}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-2 gap-8">
               {/* Brand */}
               <div className="space-y-4">
                 <div className="text-2xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
                   Kamile Lootawan
                 </div>
                 <p className="text-gray-400 leading-relaxed">
-                  Physiotherapist & Entrepreneur learning to build with AI and Next.js.
+                  Physiotherapist, Entrepreneur and Pioneer in Caribbean Tech Health.
                 </p>
                 <div className="flex space-x-4">
                   {/* GitHub */}
@@ -71,23 +71,13 @@ export default function Home() {
                     </svg>
                   </a>
 
-                  {/* Email */}
-                  <a
-                    href="mailto:kamile@example.com"
-                    className="w-10 h-10 bg-gray-800 dark:bg-gray-800 rounded-full flex items-center justify-center text-gray-400 hover:text-white hover:bg-emerald-600 dark:hover:bg-emerald-600 transition-all duration-300 transform hover:-translate-y-1 hover:scale-110"
-                    aria-label="Email"
-                  >
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                    </svg>
-                  </a>
                 </div>
               </div>
 
               {/* Quick Links */}
               <div className="space-y-4">
-                <h3 className="text-lg font-semibold">Quick Links</h3>
-                <ul className="space-y-2">
+                <h3 className="text-lg font-semibold text-white">Quick Links</h3>
+                <ul className="space-y-3">
                   {[
                     { name: 'About Me', href: '#about' },
                     { name: 'Projects', href: '#projects' },
@@ -97,7 +87,7 @@ export default function Home() {
                     <li key={link.name}>
                       <a
                         href={link.href}
-                        className="text-gray-400 hover:text-white transition-colors duration-300"
+                        className="text-gray-400 hover:text-emerald-400 dark:hover:text-emerald-400 transition-colors duration-300 inline-block hover:translate-x-1 transform"
                       >
                         {link.name}
                       </a>
@@ -106,27 +96,12 @@ export default function Home() {
                 </ul>
               </div>
 
-              {/* Contact Info */}
-              <div className="space-y-4">
-                <h3 className="text-lg font-semibold">Get In Touch</h3>
-                <div className="space-y-2">
-                  <p className="text-gray-400">
-                    📧 john.doe@example.com
-                  </p>
-                  <p className="text-gray-400">
-                    📱 +1 (555) 123-4567
-                  </p>
-                  <p className="text-gray-400">
-                    📍 San Francisco, CA
-                  </p>
-                </div>
-              </div>
             </div>
 
             {/* Bottom Bar */}
             <div className="border-t border-gray-800 mt-8 pt-8 text-center">
               <p className="text-gray-400">
-                © 2024 John Doe. All rights reserved. Built with Next.js and Tailwind CSS.
+                © 2025 Kamile Lootawan. All rights reserved. Built with Next.js and Tailwind CSS.
               </p>
             </div>
           </div>

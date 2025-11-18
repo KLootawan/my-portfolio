@@ -185,21 +185,9 @@ export default function Contact() {
 
   const contactInfo = [
     {
-      icon: '📧',
-      title: 'Email',
-      value: 'john.doe@example.com',
-      href: 'mailto:john.doe@example.com'
-    },
-    {
-      icon: '📱',
-      title: 'Phone',
-      value: '+1 (555) 123-4567',
-      href: 'tel:+15551234567'
-    },
-    {
       icon: '📍',
       title: 'Location',
-      value: 'San Francisco, CA',
+      value: 'Trinidad and Tobago',
       href: '#'
     },
     {
