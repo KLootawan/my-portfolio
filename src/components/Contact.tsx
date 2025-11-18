@@ -205,8 +205,8 @@ export default function Contact() {
     {
       icon: '💼',
       title: 'LinkedIn',
-      value: 'linkedin.com/in/johndoe',
-      href: 'https://linkedin.com/in/johndoe'
+      value: 'linkedin.com/in/kamile-lootawan',
+      href: 'https://www.linkedin.com/in/kamile-lootawan-599696336'
     }
   ]
 

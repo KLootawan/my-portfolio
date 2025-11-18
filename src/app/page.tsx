@@ -47,7 +47,7 @@ export default function Home() {
 
                   {/* LinkedIn */}
                   <a
-                    href="https://linkedin.com/in/kamilelootawan"
+                    href="https://www.linkedin.com/in/kamile-lootawan-599696336"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-10 h-10 bg-gray-800 dark:bg-gray-800 rounded-full flex items-center justify-center text-gray-400 hover:text-white hover:bg-blue-600 dark:hover:bg-blue-600 transition-all duration-300 transform hover:-translate-y-1 hover:scale-110"
@@ -60,7 +60,7 @@ export default function Home() {
 
                   {/* Twitter */}
                   <a
-                    href="https://twitter.com/kamilelootawan"
+                    href="https://x.com/Kamile1144266"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-10 h-10 bg-gray-800 dark:bg-gray-800 rounded-full flex items-center justify-center text-gray-400 hover:text-white hover:bg-sky-500 dark:hover:bg-sky-500 transition-all duration-300 transform hover:-translate-y-1 hover:scale-110"
