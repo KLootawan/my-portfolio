@@ -13,11 +13,14 @@ interface Project {
   liveUrl: string
   githubUrl: string
   featured: boolean
+  buttonText?: string
+  videoUrl?: string
 }
 
 export default function Projects() {
   const [isVisible, setIsVisible] = useState(false)
   const [activeFilter, setActiveFilter] = useState('All')
+  const [selectedVideo, setSelectedVideo] = useState<string | null>(null)
   const { isDarkMode } = useDarkMode()
   const { ref: projectsRef, isIntersecting } = useIntersectionObserver({
     threshold: 0.1,
@@ -33,8 +36,8 @@ export default function Projects() {
   const projects: Project[] = [
     {
       id: 1,
-      title: 'HealthTech Dashboard',
-      description: 'A comprehensive healthcare dashboard for physiotherapists to track patient progress, manage appointments, and analyze treatment outcomes using modern web technologies.',
+      title: 'Quick Stress Check',
+      description: 'A wellness tool with quick grounding activities designed to help with stress awareness and emotional regulation.',
       image: '/api/placeholder/400/300',
       technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Prisma'],
       liveUrl: '#',
@@ -43,8 +46,8 @@ export default function Projects() {
     },
     {
       id: 2,
-      title: 'AI-Powered Exercise App',
-      description: 'An intelligent exercise recommendation app that uses AI to suggest personalized rehabilitation exercises based on patient conditions and progress tracking.',
+      title: 'Mini Posture Screening for Desk Workers',
+      description: 'A free mini posture screening for desk workers to identify poor or optimal postures, identify areas of tension and suggest simple stretches to help relieve muscle spasm in common areas.',
       image: '/api/placeholder/400/300',
       technologies: ['React', 'Python', 'TensorFlow', 'OpenAI API'],
       liveUrl: '#',
@@ -53,13 +56,15 @@ export default function Projects() {
     },
     {
       id: 3,
-      title: 'PhysioConnect Platform',
-      description: 'A patient-therapist communication platform with video consultations, exercise demonstrations, and progress monitoring features for remote physiotherapy sessions.',
+      title: 'Innspire Health',
+      description: 'A virtual platform to allow faster access to Physiotherapy within 24-48 hrs using technology-assisted assessments and Physio-led rehabilitation plans.',
       image: '/api/placeholder/400/300',
       technologies: ['Next.js', 'WebRTC', 'MongoDB', 'Socket.io'],
       liveUrl: '#',
       githubUrl: '#',
-      featured: true
+      featured: true,
+      buttonText: 'Visit Page',
+      videoUrl: 'https://www.loom.com/embed/your-video-id' // Replace with your Loom embed URL (from Share > Embed)
     }
   ]
 
@@ -125,20 +130,13 @@ export default function Projects() {
                     </div>
                   )}
                   <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
-                    <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex space-x-4">
+                    <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <a
                         href={project.liveUrl}
                         className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-gray-800 hover:bg-emerald-500 hover:text-white transition-colors duration-300"
-                        aria-label="View Project"
+                        aria-label="Try Now"
                       >
                         <span className="text-lg">🔗</span>
-                      </a>
-                      <a
-                        href={project.githubUrl}
-                        className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-gray-800 hover:bg-teal-500 hover:text-white transition-colors duration-300"
-                        aria-label="View Source Code"
-                      >
-                        <span className="text-lg">📁</span>
                       </a>
                     </div>
                   </div>
@@ -166,19 +164,21 @@ export default function Projects() {
                   </div>
 
                   {/* Action Buttons */}
-                  <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
+                  <div className={`flex ${project.videoUrl ? 'flex-col sm:flex-row gap-2 sm:gap-4' : ''}`}>
                     <a
                       href={project.liveUrl}
-                      className="flex-1 bg-gradient-to-r from-emerald-600 to-teal-600 text-white text-center py-2 px-4 rounded-lg hover:shadow-lg hover:shadow-emerald-500/25 transition-all duration-300 transform hover:-translate-y-0.5"
+                      className={`${project.videoUrl ? 'flex-1' : 'w-full'} bg-gradient-to-r from-emerald-600 to-teal-600 text-white text-center py-2 px-4 rounded-lg hover:shadow-lg hover:shadow-emerald-500/25 transition-all duration-300 transform hover:-translate-y-0.5`}
                     >
-                      View Project
+                      {project.buttonText || 'Try Now'}
                     </a>
-                    <a
-                      href={project.githubUrl}
-                      className="flex-1 border border-emerald-300 dark:border-emerald-600 text-emerald-700 dark:text-emerald-300 text-center py-2 px-4 rounded-lg hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-all duration-300"
-                    >
-                      Source Code
-                    </a>
+                    {project.videoUrl && (
+                      <button
+                        onClick={() => setSelectedVideo(project.videoUrl || null)}
+                        className="flex-1 border border-emerald-300 dark:border-emerald-600 text-emerald-700 dark:text-emerald-300 py-2 px-4 rounded-lg hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-all duration-300"
+                      >
+                        View Project
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
@@ -193,6 +193,41 @@ export default function Projects() {
           </div>
         </div>
       </div>
+
+      {/* Video Modal */}
+      {selectedVideo && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 p-4"
+          onClick={() => setSelectedVideo(null)}
+        >
+          <div 
+            className="relative w-full max-w-4xl bg-white dark:bg-gray-900 rounded-lg overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => setSelectedVideo(null)}
+              className="absolute top-4 right-4 z-10 w-10 h-10 bg-gray-900 dark:bg-gray-700 text-white rounded-full flex items-center justify-center hover:bg-gray-800 dark:hover:bg-gray-600 transition-colors duration-300"
+              aria-label="Close video"
+            >
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+            
+            {/* Video Container */}
+            <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+              <iframe
+                className="absolute top-0 left-0 w-full h-full"
+                src={selectedVideo}
+                title="Project Walkthrough"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   )
 }

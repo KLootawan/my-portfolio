@@ -64,16 +64,16 @@ export default function About() {
                 <h3 className={`text-2xl font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Experience</h3>
                 <div className="grid grid-cols-3 gap-4">
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-emerald-600 dark:text-emerald-400 mb-2">50+</div>
+                    <div className="text-3xl font-bold text-emerald-600 dark:text-emerald-400 mb-2">3</div>
                     <div className={`text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>Projects</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-teal-600 dark:text-teal-400 mb-2">5+</div>
-                    <div className={`text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>Years</div>
+                    <div className="text-3xl font-bold text-teal-600 dark:text-teal-400 mb-2">6+</div>
+                    <div className={`text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>Years as Physio</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-emerald-600 dark:text-emerald-400 mb-2">100%</div>
-                    <div className={`text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>Satisfaction</div>
+                    <div className="text-3xl font-bold text-emerald-600 dark:text-emerald-400 mb-2">15K-19K</div>
+                    <div className={`text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>Treatment Sessions</div>
                   </div>
                 </div>
               </div>
