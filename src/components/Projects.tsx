@@ -17,11 +17,28 @@ interface Project {
   videoUrl?: string
 }
 
+interface Certificate {
+  id: number
+  title: string
+  image: string
+}
+
 export default function Projects() {
   const [isVisible, setIsVisible] = useState(false)
   const [activeFilter, setActiveFilter] = useState('All')
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null)
+  const [credentialsModalOpen, setCredentialsModalOpen] = useState(false)
+  const [zoomedCertificate, setZoomedCertificate] = useState<Certificate | null>(null)
   const { isDarkMode } = useDarkMode()
+
+  const certificates: Certificate[] = [
+    { id: 1, title: 'Certificate 1', image: '/api/placeholder/400/300' },
+    { id: 2, title: 'Certificate 2', image: '/api/placeholder/400/300' },
+    { id: 3, title: 'Certificate 3', image: '/api/placeholder/400/300' },
+    { id: 4, title: 'Certificate 4', image: '/api/placeholder/400/300' },
+    { id: 5, title: 'Certificate 5', image: '/api/placeholder/400/300' },
+    { id: 6, title: 'Certificate 6', image: '/api/placeholder/400/300' },
+  ]
   const { ref: projectsRef, isIntersecting } = useIntersectionObserver({
     threshold: 0.1,
     triggerOnce: true
@@ -42,29 +59,41 @@ export default function Projects() {
       technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Prisma'],
       liveUrl: '#',
       githubUrl: '#',
-      featured: true
+      featured: false,
+      buttonText: 'In Progress'
     },
     {
       id: 2,
-      title: 'Mini Posture Screening for Desk Workers',
-      description: 'A free mini posture screening for desk workers to identify poor or optimal postures, identify areas of tension and suggest simple stretches to help relieve muscle spasm in common areas.',
+      title: 'AI Assisted Diabetes Risk Screening',
+      description: 'This tool promotes early detection and prevention of diabetes through accessible online screening. It supports individuals in recognizing risk factors early and encourages healthy lifestyle changes.',
       image: '/api/placeholder/400/300',
-      technologies: ['React', 'Python', 'TensorFlow', 'OpenAI API'],
-      liveUrl: '#',
+      technologies: ['HTML', 'CSS', 'JavaScript', 'Supabase'],
+      liveUrl: 'https://innspire-pt-diabetes-risk-screening.vercel.app',
       githubUrl: '#',
       featured: true
     },
     {
       id: 3,
       title: 'Innspire Health',
-      description: 'A virtual platform to allow faster access to Physiotherapy within 24-48 hrs using technology-assisted assessments and Physio-led rehabilitation plans.',
+      description: 'A virtual platform to allow faster access to Physiotherapy within 24-48 hrs using Physio-led rehabilitation plans.',
       image: '/api/placeholder/400/300',
       technologies: ['Next.js', 'WebRTC', 'MongoDB', 'Socket.io'],
       liveUrl: '#',
       githubUrl: '#',
       featured: true,
-      buttonText: 'Visit Page',
+      buttonText: 'In Progress',
       videoUrl: 'https://www.loom.com/embed/your-video-id' // Replace with your Loom embed URL (from Share > Embed)
+    },
+    {
+      id: 4,
+      title: 'Digital Credentials',
+      description: 'A portfolio section where my digital credentials, certificates, and badges are displayed and can be viewed in one place.',
+      image: '/api/placeholder/400/300',
+      technologies: ['Next.js', 'TypeScript', 'Tailwind CSS'],
+      liveUrl: '#credentials',
+      githubUrl: '#',
+      featured: true,
+      buttonText: 'View Credentials'
     }
   ]
 
@@ -165,12 +194,21 @@ export default function Projects() {
 
                   {/* Action Buttons */}
                   <div className={`flex ${project.videoUrl ? 'flex-col sm:flex-row gap-2 sm:gap-4' : ''}`}>
-                    <a
-                      href={project.liveUrl}
-                      className={`${project.videoUrl ? 'flex-1' : 'w-full'} bg-gradient-to-r from-emerald-600 to-teal-600 text-white text-center py-2 px-4 rounded-lg hover:shadow-lg hover:shadow-emerald-500/25 transition-all duration-300 transform hover:-translate-y-0.5`}
-                    >
-                      {project.buttonText || 'Try Now'}
-                    </a>
+                    {project.id === 4 ? (
+                      <button
+                        onClick={() => setCredentialsModalOpen(true)}
+                        className={`${project.videoUrl ? 'flex-1' : 'w-full'} bg-gradient-to-r from-emerald-600 to-teal-600 text-white text-center py-2 px-4 rounded-lg hover:shadow-lg hover:shadow-emerald-500/25 transition-all duration-300 transform hover:-translate-y-0.5`}
+                      >
+                        {project.buttonText || 'View Credentials'}
+                      </button>
+                    ) : (
+                      <a
+                        href={project.liveUrl}
+                        className={`${project.videoUrl ? 'flex-1' : 'w-full'} bg-gradient-to-r from-emerald-600 to-teal-600 text-white text-center py-2 px-4 rounded-lg hover:shadow-lg hover:shadow-emerald-500/25 transition-all duration-300 transform hover:-translate-y-0.5`}
+                      >
+                        {project.buttonText || 'Try Now'}
+                      </a>
+                    )}
                     {project.videoUrl && (
                       <button
                         onClick={() => setSelectedVideo(project.videoUrl || null)}
@@ -224,6 +262,93 @@ export default function Projects() {
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Credentials Modal */}
+      {credentialsModalOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 p-4"
+          onClick={() => {
+            setZoomedCertificate(null)
+            setCredentialsModalOpen(false)
+          }}
+        >
+          <div
+            className={`relative w-full max-w-5xl max-h-[90vh] flex flex-col bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-2xl ${isDarkMode ? 'bg-gray-900' : 'bg-white'}`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 shrink-0">
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+                {zoomedCertificate ? zoomedCertificate.title : 'My Digital Credentials'}
+              </h3>
+              <button
+                onClick={() => {
+                  if (zoomedCertificate) setZoomedCertificate(null)
+                  else {
+                    setCredentialsModalOpen(false)
+                    setZoomedCertificate(null)
+                  }
+                }}
+                className="w-10 h-10 rounded-full flex items-center justify-center bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+                aria-label={zoomedCertificate ? 'Back to wall' : 'Close'}
+              >
+                {zoomedCertificate ? (
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                  </svg>
+                ) : (
+                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                )}
+              </button>
+            </div>
+
+            {/* Modal Body */}
+            <div className="flex-1 overflow-auto p-4 sm:p-6">
+              {zoomedCertificate ? (
+                /* Zoomed certificate view */
+                <div className="flex flex-col items-center">
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">Click outside or use the back arrow to return to the wall</p>
+                  <div className="relative w-full max-w-2xl rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 shadow-lg">
+                    <img
+                      src={zoomedCertificate.image}
+                      alt={zoomedCertificate.title}
+                      className="w-full h-auto object-contain max-h-[70vh]"
+                    />
+                  </div>
+                </div>
+              ) : (
+                /* Virtual wall of credentials - scrollable grid */
+                <>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mb-4 text-center">
+                    Scroll to browse, or click a certificate to zoom in
+                  </p>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-4 overflow-y-auto max-h-[60vh] pr-2">
+                    {certificates.map((cert) => (
+                      <button
+                        key={cert.id}
+                        onClick={() => setZoomedCertificate(cert)}
+                        className="group relative aspect-[4/3] rounded-xl overflow-hidden bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-gray-700 dark:to-gray-600 shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                      >
+                        <img
+                          src={cert.image}
+                          alt={cert.title}
+                          className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-opacity" />
+                        <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/70 to-transparent">
+                          <span className="text-white text-sm font-medium truncate block">{cert.title}</span>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>
