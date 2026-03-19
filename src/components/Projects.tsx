@@ -25,7 +25,7 @@ interface Certificate {
 
 export default function Projects() {
   const [isVisible, setIsVisible] = useState(false)
-  const [activeFilter, setActiveFilter] = useState('All')
+  const [activeFilter, setActiveFilter] = useState('Featured')
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null)
   const [credentialsModalOpen, setCredentialsModalOpen] = useState(false)
   const [zoomedCertificate, setZoomedCertificate] = useState<Certificate | null>(null)
@@ -79,8 +79,21 @@ export default function Projects() {
       title: 'Innspire Health',
       description: 'A virtual platform to allow faster access to Physiotherapy within 24-48 hrs using Physio-led rehabilitation plans.',
       image: '/api/placeholder/400/300',
-      technologies: ['Next.js', 'WebRTC', 'MongoDB', 'Socket.io'],
-      liveUrl: '#',
+      technologies: [
+        'Next.js',
+        'React (App Router)',
+        'TypeScript',
+        'Tailwind CSS',
+        'TensorFlow.js',
+        'Pose Detection (MoveNet)',
+        'face-api.js',
+        'Supabase (Auth + Storage)',
+        'getUserMedia',
+        'MediaRecorder',
+        'Canvas (captureStream)',
+        'ESLint'
+      ],
+      liveUrl: 'https://innspirehealth.vercel.app/welcome',
       githubUrl: '#',
       featured: true,
       buttonText: 'In Progress',
@@ -164,6 +177,8 @@ export default function Projects() {
                     <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <a
                         href={project.liveUrl}
+                        target={project.liveUrl.startsWith('http') ? '_blank' : undefined}
+                        rel={project.liveUrl.startsWith('http') ? 'noopener noreferrer' : undefined}
                         className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-gray-800 hover:bg-emerald-500 hover:text-white transition-colors duration-300"
                         aria-label="Try Now"
                       >
@@ -206,19 +221,31 @@ export default function Projects() {
                     ) : (
                       <a
                         href={project.liveUrl}
+                        target={project.liveUrl.startsWith('http') ? '_blank' : undefined}
+                        rel={project.liveUrl.startsWith('http') ? 'noopener noreferrer' : undefined}
                         className={`${project.videoUrl ? 'flex-1' : 'w-full'} bg-gradient-to-r from-emerald-600 to-teal-600 text-white text-center py-2 px-4 rounded-lg hover:shadow-lg hover:shadow-emerald-500/25 transition-all duration-300 transform hover:-translate-y-0.5`}
                       >
                         {project.buttonText || 'Try Now'}
                       </a>
                     )}
-                    {project.videoUrl && (
-                      <button
-                        onClick={() => setSelectedVideo(project.videoUrl || null)}
-                        className="flex-1 border border-emerald-300 dark:border-emerald-600 text-emerald-700 dark:text-emerald-300 py-2 px-4 rounded-lg hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-all duration-300"
-                      >
-                        View Project
-                      </button>
-                    )}
+                    {project.videoUrl &&
+                      (project.id === 3 ? (
+                        <a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex-1 border border-emerald-300 dark:border-emerald-600 text-emerald-700 dark:text-emerald-300 text-center py-2 px-4 rounded-lg hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-all duration-300"
+                        >
+                          View Project
+                        </a>
+                      ) : (
+                        <button
+                          onClick={() => setSelectedVideo(project.videoUrl || null)}
+                          className="flex-1 border border-emerald-300 dark:border-emerald-600 text-emerald-700 dark:text-emerald-300 py-2 px-4 rounded-lg hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-all duration-300"
+                        >
+                          View Project
+                        </button>
+                      ))}
                   </div>
                 </div>
               </div>
