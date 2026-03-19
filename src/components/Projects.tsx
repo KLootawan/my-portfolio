@@ -31,13 +31,15 @@ export default function Projects() {
   const [zoomedCertificate, setZoomedCertificate] = useState<Certificate | null>(null)
   const { isDarkMode } = useDarkMode()
 
+  // Add your certificates: put image files in public/certificates/, then add entries below.
+  // Image path: /certificates/your-filename.jpg (PNG, WebP also work).
   const certificates: Certificate[] = [
-    { id: 1, title: 'Certificate 1', image: '/api/placeholder/400/300' },
-    { id: 2, title: 'Certificate 2', image: '/api/placeholder/400/300' },
-    { id: 3, title: 'Certificate 3', image: '/api/placeholder/400/300' },
-    { id: 4, title: 'Certificate 4', image: '/api/placeholder/400/300' },
-    { id: 5, title: 'Certificate 5', image: '/api/placeholder/400/300' },
-    { id: 6, title: 'Certificate 6', image: '/api/placeholder/400/300' },
+    { id: 1, title: 'Strength and Conditioning for Physios (2023)', image: '/certificates/cert-1.png' },
+    { id: 2, title: 'IASTM Certification', image: '/certificates/cert-2.png' },
+    { id: 3, title: 'Low Back Pain (2023)', image: '/certificates/cert-3.png' },
+    { id: 4, title: 'Triple Threats to Aging (2025)', image: '/certificates/cert-4.png' },
+    { id: 5, title: 'PT Practice Certificate', image: '/certificates/cert-5.png' },
+    { id: 6, title: 'IDF Diabetes Educators Course', image: '/certificates/cert-6.png' },
   ]
   const { ref: projectsRef, isIntersecting } = useIntersectionObserver({
     threshold: 0.1,
