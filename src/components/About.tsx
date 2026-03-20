@@ -56,13 +56,13 @@ export default function About() {
                       : 'border-gray-200 bg-white shadow-gray-900/[0.06]'
                   }`}
                 >
-                  <div className="relative h-[20rem] w-full sm:h-[24rem] lg:h-[26rem]">
+                  <div className="relative h-[22rem] w-full sm:h-[26rem] lg:h-[30rem]">
                     <Image
                       src={PROFILE_IMAGE}
                       alt={PROFILE_ALT}
                       fill
                       sizes="(max-width: 1024px) 100vw, 50vw"
-                      className="object-cover object-[center_28%]"
+                      className="object-cover object-[center_35%]"
                       priority
                     />
                     <div
