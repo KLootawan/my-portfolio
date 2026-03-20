@@ -53,7 +53,7 @@ export default function Hero() {
                     alt={PROFILE_ALT}
                     fill
                     sizes="(max-width: 640px) 144px, 176px"
-                    className="object-cover object-[center_20%]"
+                    className="object-cover object-[center_30%]"
                     priority
                   />
                   <div
