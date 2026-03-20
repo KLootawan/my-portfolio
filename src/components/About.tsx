@@ -1,8 +1,13 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 import { useDarkMode } from '@/contexts/DarkModeContext'
+
+const PROFILE_IMAGE = '/images/profile.png'
+const PROFILE_ALT =
+  'Kamile Lootawan — physiotherapist and entrepreneur, professional portrait'
 
 export default function About() {
   const [isVisible, setIsVisible] = useState(false)
@@ -42,21 +47,53 @@ export default function About() {
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
             {/* Left Column - Image, Info, and Experience */}
             <div className={`space-y-6 transition-all duration-1000 delay-300 mt-8 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
-              {/* Profile Image */}
+              {/* Profile — photo + caption bar (no text over face) */}
               <div className="relative">
-                <div className={`w-full h-80 sm:h-96 rounded-2xl flex items-center justify-center ${isDarkMode ? 'bg-gradient-to-br from-gray-800 to-gray-700' : 'bg-gradient-to-br from-emerald-100 to-teal-100'}`}>
-                  <div className="text-center px-4">
-                    <div className="w-24 h-24 sm:w-32 sm:h-32 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
-                      <span className="text-3xl sm:text-4xl font-bold text-white">KL</span>
-                    </div>
-                    <h3 className={`text-xl sm:text-2xl font-bold mb-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Kamile Lootawan</h3>
-                    <p className={`text-sm sm:text-base font-medium ${isDarkMode ? 'text-gray-200' : 'text-gray-600'}`}>Physiotherapist & Entrepreneur</p>
+                <div
+                  className={`overflow-hidden rounded-2xl border shadow-lg transition-shadow ${
+                    isDarkMode
+                      ? 'border-gray-700/90 bg-gray-950 shadow-black/50'
+                      : 'border-gray-200 bg-white shadow-gray-900/[0.06]'
+                  }`}
+                >
+                  <div className="relative h-[20rem] w-full sm:h-[24rem] lg:h-[26rem]">
+                    <Image
+                      src={PROFILE_IMAGE}
+                      alt={PROFILE_ALT}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      className="object-cover object-[center_18%]"
+                      priority
+                    />
+                    <div
+                      className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-black/10 to-transparent"
+                      aria-hidden
+                    />
+                  </div>
+                  <div
+                    className={`border-t px-6 py-5 sm:px-8 sm:py-6 ${
+                      isDarkMode
+                        ? 'border-gray-700/80 bg-gray-900/95'
+                        : 'border-gray-100 bg-gray-50/95'
+                    }`}
+                  >
+                    <div className="h-0.5 w-12 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500" aria-hidden />
+                    <h3
+                      className={`mt-4 text-xl font-semibold tracking-tight sm:text-2xl ${
+                        isDarkMode ? 'text-white' : 'text-gray-900'
+                      }`}
+                    >
+                      Kamile Lootawan
+                    </h3>
+                    <p
+                      className={`mt-1 text-sm font-medium sm:text-base ${
+                        isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                      }`}
+                    >
+                      Physiotherapist & Entrepreneur
+                    </p>
                   </div>
                 </div>
-                
-                {/* Floating elements */}
-                <div className="absolute -top-4 -right-4 w-8 h-8 bg-yellow-400 rounded-full animate-bounce-slow"></div>
-                <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-green-400 rounded-full animate-pulse"></div>
               </div>
 
               {/* Experience Stats */}

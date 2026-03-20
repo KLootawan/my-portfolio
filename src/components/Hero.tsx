@@ -1,8 +1,13 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 import { useDarkMode } from '@/contexts/DarkModeContext'
+
+const PROFILE_IMAGE = '/images/profile.png'
+const PROFILE_ALT =
+  'Kamile Lootawan — physiotherapist and entrepreneur, professional portrait'
 
 export default function Hero() {
   const [isVisible, setIsVisible] = useState(false)
@@ -38,17 +43,25 @@ export default function Hero() {
       </div>
       <div ref={heroRef} className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-20">
         <div className="text-center">
-          {/* Profile Image */}
+          {/* Profile — clean executive-style headshot */}
           <div className={`mb-8 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <div className="relative inline-block">
-              <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full bg-gradient-to-r from-emerald-500 to-teal-600 p-1 mx-auto">
-                <div className="w-full h-full rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-                  <span className="text-4xl sm:text-5xl font-bold text-gray-600 dark:text-gray-300">
-                    KL
-                  </span>
+            <div className="relative mx-auto inline-block">
+              <div className="relative h-36 w-36 sm:h-44 sm:w-44">
+                <div className="relative h-full w-full overflow-hidden rounded-full bg-slate-800 shadow-xl ring-2 ring-white/50">
+                  <Image
+                    src={PROFILE_IMAGE}
+                    alt={PROFILE_ALT}
+                    fill
+                    sizes="(max-width: 640px) 144px, 176px"
+                    className="object-cover object-[center_20%]"
+                    priority
+                  />
+                  <div
+                    className="pointer-events-none absolute inset-0 rounded-full ring-1 ring-inset ring-black/20"
+                    aria-hidden
+                  />
                 </div>
               </div>
-              <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-green-500 rounded-full border-4 border-white dark:border-gray-800"></div>
             </div>
           </div>
 
